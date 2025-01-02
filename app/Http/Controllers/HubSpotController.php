@@ -107,14 +107,6 @@ class HubSpotController extends Controller
     {
         $query = DB::connection("sqlsrv")
         ->table("WST_DatosVentasparaHubSpot")
-        // ->select(
-        //     'id',
-        //     'document_number',
-        //     'product_code',
-        //     'product_name',
-        //     'precio_neto',
-        //     'document_date',
-        // )
         ->where('NumeroDocumento', "=", $invoice_number)
         ->get()
         ->map(function ($item) {
@@ -125,26 +117,6 @@ class HubSpotController extends Controller
             }
             return $item;
         });
-
-        // $query = \DB::table("hb_invoices")
-        // ->select(
-        //     'id',
-        //     'document_number',
-        //     'product_code',
-        //     'product_name',
-        //     'precio_neto',
-        //     'document_date'
-        // )
-        // ->where("document_number", "=", $invoice_number)
-        // ->get()
-        // ->map(function ($item) {
-        //     foreach ($item as $key => $value) {
-        //         if (is_string($value)) {
-        //             $item->$key = trim($value); // Aplica trim a los valores string
-        //         }
-        //     }
-        //     return $item;
-        // });
 
         return $query;
     }
@@ -165,6 +137,17 @@ class HubSpotController extends Controller
             $data = $request->all();
             // $results = DB::connection("sqlsrv")->select('SELECT * FROM WST_DatosVentasparaHubSpot');
             $this->PrintLog("GetInvoicesInfo",$data);
+
+            $properties_valids = ["numero_de_facturas"];
+            if(COUNT($this->ValidPropertiesAllowedKlHb($data, $properties_valids)) != 0)
+            {
+                return response()->json([
+                    'success' => 1,
+                    'responseCode' => 400,
+                    'message' => 'Las propiedades que envías, no son correctas, comunícate con el administrador.',
+                    'data' => null
+                ]);
+            }
 
             // GET INVOICES
             $invoices = json_decode($request->get("numero_de_facturas"));
