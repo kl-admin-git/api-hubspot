@@ -1,0 +1,18 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  update-repo:
+    runs-on: self-hosted
+    steps:
+      # Accede al contenedor y actualiza el repositorio
+      - name: Acceso al contenedor y pull
+        run: |
+          docker exec -it api-hubspot-api-hubspot-1 sh -c "
+          cd /var/www &&
+          git pull origin main"
