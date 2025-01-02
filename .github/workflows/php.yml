@@ -13,6 +13,8 @@ jobs:
       # Accede al contenedor y actualiza el repositorio
       - name: Acceso al contenedor y pull
         run: |
-          docker exec -it api-hubspot-api-hubspot-1 sh -c "
-          cd /var/www &&
-          git pull origin main"
+          docker exec -u root api-hubspot-api-hubspot-1 /bin/sh -c '
+            cd /var/www &&
+            git pull origin main &&
+            echo Git Pull completado dentro del contenedor
+          '
