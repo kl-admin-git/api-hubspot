@@ -15,6 +15,7 @@ jobs:
         run: |
           docker exec -u root api-hubspot-api-hubspot-1 /bin/sh -c '
             cd /var/www &&
+            git checkout . &&
             git pull origin main &&
             echo Git Pull completado dentro del contenedor
           '
