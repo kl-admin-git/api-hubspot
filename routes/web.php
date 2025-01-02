@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Versión Software: '.$router->app->version();
 });
 
 $router->post('/get_invoices_info', [

@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libgssapi-krb5-2 \
     libpq-dev \
     gnupg2 \
+    git \
     curl \
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
