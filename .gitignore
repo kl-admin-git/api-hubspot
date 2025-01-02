@@ -1,0 +1,30 @@
+
+# Ignorar el directorio de dependencias de Composer
+/vendor
+
+# Ignorar los archivos de configuración de entorno
+.env
+.env.*
+
+# Ignorar el directorio de caché y logs
+/storage/*
+!storage/app
+!storage/framework
+!storage/logs
+
+# Ignorar el directorio de archivos compilados de la aplicación
+/bootstrap/cache
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar el directorio de pruebas si no se está trabajando con pruebas
+/tests
+
+# Ignorar el directorio de la base de datos SQLite si se utiliza en lugar de MySQL/PostgreSQL
+/database/database.sqlite
+
+# Ignorar las configuraciones locales de IDEs
+.idea/
+.vscode/
